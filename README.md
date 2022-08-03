@@ -1,2 +1,1 @@
-# ansible-playbook_nginx
-# ansible-playbook_nginx
+Simple ansible-playbook to install nginx and upload website
