@@ -1,0 +1,4 @@
+
+#enter your server, user and privat key file
+main ansible_host=mikhailenko.pro ansible_user=root ansible_ssh_privat_key_file=/home/sectoid/.ssh/id_rsa
+

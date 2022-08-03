@@ -1,0 +1,32 @@
+---
+- name: install Nginx and Upload WebPage to server
+  hosts: main
+  become: yes
+
+  vars:
+    src_folder:   portf_src/dist/
+    dest_folder:  /usr/share/nginx/html/
+
+
+  tasks:
+  - name: Add epel-release repo
+    yum:
+      name: epel-release
+      state: present
+
+  - name: install Nginx for Centos
+    yum: update_cache=yes name=nginx state=latest
+      
+  - name: Copy source directory to server
+    copy: src={{ src_folder }} dest={{ dest_folder }} mode=0555
+    notify: Restart Nginx (Redhat)
+     
+  - name: Start Nginx
+    service: name=nginx state=started enabled=yes
+
+
+
+  handlers:
+  - name: Restart Nginx (Redhat)
+    service: name=nginx state=restarted
+    when: ansible_os_family == "Redhat"
